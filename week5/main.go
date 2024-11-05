@@ -26,7 +26,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen port %s: %v", p, err)
 	}
-	
+
 	url := fmt.Sprintf("http://%s", l.Addr().String())
 
 	log.Printf("start with: %v", url)
@@ -59,5 +59,4 @@ func run(ctx context.Context, l net.Listener) error {
 		log.Printf("Failed to shutdown: %+v", err)
 	}
 	return eg.Wait()
-
 }
