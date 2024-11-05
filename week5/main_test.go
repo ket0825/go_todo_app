@@ -22,7 +22,7 @@ func TestRun(t *testing.T) {
 	eg.Go(func() error {
 		return run(ctx, l)
 	})
-	
+
 	in := "message"
 	url := fmt.Sprintf("http://%s/%s", l.Addr().String(), in)
 	t.Logf("try reqeust to %q", url)
