@@ -3,7 +3,7 @@
 
 DOCKER_TAG := latest
 build: ## 배포용 도커 이미지 빌드 
-		docker build -t /root/projects/go/src/week5:${DOCKER_TAG} --target deploy ./
+		docker build -t week5:${DOCKER_TAG} --target deploy ./
 
 build-local: ## 로컬 환경용 도커 이미지 빌드
 		docker compose build --no-cache
