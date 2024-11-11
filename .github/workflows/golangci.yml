@@ -20,7 +20,7 @@ jobs:
           GOLANGCI_LINT_DEBUG: 1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          golangci_lint_flags: "--config=${{ github.workspace }}/.golangci.yml ./..."
+          golangci_lint_flags: "--config=../.golangci.yml ./..."
           fail_on_error: true
           reporter: "github-pr-review"
           workdir: "week5"
