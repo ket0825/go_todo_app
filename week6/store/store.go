@@ -1,3 +1,5 @@
+// `Store` package is responsible for storing and managing tasks. It provides a simple in-memory store for tasks. It has a `TaskStore` struct that holds a map of tasks. It also provides methods to add, get, and list all tasks.
+
 package store
 
 import (
