@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"week6/handler"
-	"week6/store"
+	"github.com/ket0825/go_todo_app/handler"
+	"github.com/ket0825/go_todo_app/store"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-playground/validator/v10"

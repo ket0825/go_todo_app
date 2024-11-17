@@ -6,9 +6,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"week6/entity"
-	"week6/store"
-	"week6/testutil"
+	"github.com/ket0825/go_todo_app/entity"
+	"github.com/ket0825/go_todo_app/store"
+	"github.com/ket0825/go_todo_app/testutil"
 
 	"github.com/go-playground/validator/v10"
 )

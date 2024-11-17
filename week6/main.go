@@ -6,7 +6,8 @@ import (
 	"log"
 	"net"
 	"os"
-	"week6/config"
+
+	"github.com/ket0825/go_todo_app/config"
 )
 
 func main() {
