@@ -30,6 +30,6 @@ jobs:
     - run: |
         go install github.com/sqldef/sqldef/cmd/mysqldef@latest
         mysqldef -u todo -p todo -h 127.0.0.1 -P 3306 todo < ${GITHUB_WORKSPACE}/week6/_tools/mysql/schema.sql
-    - run: go test -v ./... -coverprofile=coverage.out
+    - run: cd ${GITHUB_WORKSPACE}/week6 && go test -v ./... -coverprofile=coverage.out
     - name: report coverage
       uses: k1LoW/octocov-action@v0
