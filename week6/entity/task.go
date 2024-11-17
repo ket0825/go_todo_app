@@ -14,10 +14,11 @@ const (
 )
 
 type Task struct {
-	ID      TaskID     `json:"id"` // Tag: json에서 id를 key로 둠.
-	Title   string     `json:"title"`
-	Status  TaskStatus `json:"status"`
-	Created time.Time  `json:"created"`
+	ID       TaskID     `json:"id"` // Tag: json에서 id를 key로 둠.
+	Title    string     `json:"title"`
+	Status   TaskStatus `json:"status"`
+	Created  time.Time  `json:"created"`
+	Modified time.Time  `json:"modified" db:"modified"`
 }
 
 type Tasks []*Task
