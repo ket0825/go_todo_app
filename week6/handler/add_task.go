@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"time"
 
-	"week6/entity"
-	"week6/store"
+	"github.com/ket0825/go_todo_app/entity"
+	"github.com/ket0825/go_todo_app/store"
 
 	"github.com/go-playground/validator/v10"
 )

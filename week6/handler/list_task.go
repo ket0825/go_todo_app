@@ -2,8 +2,9 @@ package handler
 
 import (
 	"net/http"
-	"week6/entity"
-	"week6/store"
+
+	"github.com/ket0825/go_todo_app/entity"
+	"github.com/ket0825/go_todo_app/store"
 )
 
 type ListTask struct {

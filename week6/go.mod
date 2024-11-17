@@ -1,4 +1,4 @@
-module week6
+module github.com/ket0825/go_todo_app
 
 go 1.23.1
 

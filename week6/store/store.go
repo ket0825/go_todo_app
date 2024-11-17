@@ -5,7 +5,8 @@ package store
 import (
 	"errors"
 	"fmt"
-	"week6/entity"
+
+	"github.com/ket0825/go_todo_app/entity"
 )
 
 var (
