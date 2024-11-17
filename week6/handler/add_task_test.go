@@ -30,13 +30,13 @@ func TestAddTask(t *testing.T) {
 			},
 		},
 		// For test coverage
-		// "badRequest": {
-		// 	reqFile: "testdata/add_task/bad_req.json.golden",
-		// 	want: want{
-		// 		status:  http.StatusBadRequest,
-		// 		rspFile: "testdata/add_task/bad_rsp.json.golden",
-		// 	},
-		// },
+		"badRequest": {
+			reqFile: "testdata/add_task/bad_req.json.golden",
+			want: want{
+				status:  http.StatusBadRequest,
+				rspFile: "testdata/add_task/bad_rsp.json.golden",
+			},
+		},
 	}
 	for n, tt := range tests {
 		t.Run(n, func(t *testing.T) {
