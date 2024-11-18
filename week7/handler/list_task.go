@@ -3,14 +3,11 @@ package handler
 import (
 	"net/http"
 
-	"github.com/jmoiron/sqlx"
 	"github.com/ket0825/go_todo_app/entity"
-	"github.com/ket0825/go_todo_app/store"
 )
 
 type ListTask struct {
-	DB   *sqlx.DB
-	Repo *store.Repository
+	Service ListTasksService
 }
 
 type task struct {
@@ -21,7 +18,7 @@ type task struct {
 
 func (lt *ListTask) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	tasks, err := lt.Repo.ListTasks(ctx, lt.DB) // DB에서 Select를 하여 Task를 가져옴
+	tasks, err := lt.Service.ListTasks(ctx) // Service 단에서 DB에 접근하여 데이터를 가져옴
 	if err != nil {
 		RespondJSON(ctx, w, &ErrResponse{
 			Message: err.Error(),

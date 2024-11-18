@@ -7,6 +7,7 @@ import (
 	"github.com/ket0825/go_todo_app/clock"
 	"github.com/ket0825/go_todo_app/config"
 	"github.com/ket0825/go_todo_app/handler"
+	"github.com/ket0825/go_todo_app/service"
 	"github.com/ket0825/go_todo_app/store"
 
 	"github.com/go-chi/chi/v5"
@@ -26,9 +27,15 @@ func NewMux(ctx context.Context, cfg *config.Config) (http.Handler, func(), erro
 		return nil, cleanup, err
 	}
 	r := store.Repository{Clocker: clock.RealClocker{}}
-	at := &handler.AddTask{DB: db, Repo: &r, Validator: v} // AddTask를 handler로 사용해도 되는 이유: 내부적으로 메서드가 ServeHTTP를 구현하고 있기 때문에, HandlerFunc로 사용할 수 있다.
+	at := &handler.AddTask{
+		Service:   &service.AddTask{DB: db, Repo: &r},
+		Validator: v,
+	}
 	mux.Post("/tasks", at.ServeHTTP)
-	lt := &handler.ListTask{DB: db, Repo: &r}
+	lt := &handler.ListTask{
+		Service: &service.ListTask{DB: db, Repo: &r},
+		// list이기에 validator는 사용하지 않음
+	}
 	mux.Get("/tasks", lt.ServeHTTP)
 	return mux, cleanup, nil
 }

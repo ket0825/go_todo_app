@@ -85,7 +85,7 @@ var _ AddTaskService = &AddTaskServiceMock{}
 //
 //		// make and configure a mocked AddTaskService
 //		mockedAddTaskService := &AddTaskServiceMock{
-//			AddTaskFunc: func(ctx context.Context, t *entity.Task) error {
+//			AddTaskFunc: func(ctx context.Context, title string) (*entity.Task, error) {
 //				panic("mock out the AddTask method")
 //			},
 //		}
@@ -96,7 +96,7 @@ var _ AddTaskService = &AddTaskServiceMock{}
 //	}
 type AddTaskServiceMock struct {
 	// AddTaskFunc mocks the AddTask method.
-	AddTaskFunc func(ctx context.Context, t *entity.Task) error
+	AddTaskFunc func(ctx context.Context, title string) (*entity.Task, error)
 
 	// calls tracks calls to the methods.
 	calls struct {
@@ -104,29 +104,29 @@ type AddTaskServiceMock struct {
 		AddTask []struct {
 			// Ctx is the ctx argument value.
 			Ctx context.Context
-			// T is the t argument value.
-			T *entity.Task
+			// Title is the title argument value.
+			Title string
 		}
 	}
 	lockAddTask sync.RWMutex
 }
 
 // AddTask calls AddTaskFunc.
-func (mock *AddTaskServiceMock) AddTask(ctx context.Context, t *entity.Task) error {
+func (mock *AddTaskServiceMock) AddTask(ctx context.Context, title string) (*entity.Task, error) {
 	if mock.AddTaskFunc == nil {
 		panic("AddTaskServiceMock.AddTaskFunc: method is nil but AddTaskService.AddTask was just called")
 	}
 	callInfo := struct {
-		Ctx context.Context
-		T   *entity.Task
+		Ctx   context.Context
+		Title string
 	}{
-		Ctx: ctx,
-		T:   t,
+		Ctx:   ctx,
+		Title: title,
 	}
 	mock.lockAddTask.Lock()
 	mock.calls.AddTask = append(mock.calls.AddTask, callInfo)
 	mock.lockAddTask.Unlock()
-	return mock.AddTaskFunc(ctx, t)
+	return mock.AddTaskFunc(ctx, title)
 }
 
 // AddTaskCalls gets all the calls that were made to AddTask.
@@ -134,12 +134,12 @@ func (mock *AddTaskServiceMock) AddTask(ctx context.Context, t *entity.Task) err
 //
 //	len(mockedAddTaskService.AddTaskCalls())
 func (mock *AddTaskServiceMock) AddTaskCalls() []struct {
-	Ctx context.Context
-	T   *entity.Task
+	Ctx   context.Context
+	Title string
 } {
 	var calls []struct {
-		Ctx context.Context
-		T   *entity.Task
+		Ctx   context.Context
+		Title string
 	}
 	mock.lockAddTask.RLock()
 	calls = mock.calls.AddTask
