@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/ket0825/go_todo_app/entity"
 	"github.com/ket0825/go_todo_app/testutil"
 )
@@ -58,7 +59,8 @@ func TestAddTask(t *testing.T) {
 			}
 
 			sut := AddTask{
-				Service: moq,
+				Service:   moq,
+				Validator: validator.New(),
 			}
 			sut.ServeHTTP(w, r)
 
