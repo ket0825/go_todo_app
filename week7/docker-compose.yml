@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  app:
+    image: gotodo
+    ports:
+      - 18000:8080
+    volumes:
+      - .:/app
+    build:
+      args:
+        - target=dev  
+    environment:
+      TODO_ENV: dev
+      PORT: 8080
+      TODO_DB_HOST: todo-db
+      TODO_DB_PORT: 3306
+      TODO_DB_USER: todo
+      TODO_DB_PASSWORD: todo
+      TODO_DB_NAME: todo
+
+  todo-db:
+    image: mysql:8.0.29
+    platform: linux/x86_64
+    container_name: todo-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: todo
+      MYSQL_USER: todo
+      MYSQL_PASSWORD: todo
+      MYSQL_DATABASE: todo
+      MYSQL_ROOT_HOST: "%"  # 추가
+      MYSQL_USER_HOST: "%"  # 추가          
+    volumes:
+      - todo-db-data:/var/lib/mysql
+      - $PWD/_tools/mysql/conf.d:/etc/mysql/conf.d:cached            
+    ports:
+      - "33306:3306"    
+volumes:
+    todo-db-data:
+
+    
