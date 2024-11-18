@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"github.com/ket0825/go_todo_app/clock"
 	"github.com/ket0825/go_todo_app/config"
@@ -37,6 +38,16 @@ func New(ctx context.Context, cfg *config.Config) (*sqlx.DB, func(), error) {
 
 // 여러 테이블을 하나의 type method로 관리하기 위해 Repository를 사용
 // 의존성 주입을 사용하는 경우, 하나의 type으로 통일하여 쉽게 처리 가능.
+
+// 각 인터페이스가 특정 목적에 맞는 최소한의 메서드만 포함
+// 명확한 책임 분리
+
+// Beginner: 트랜잭션 시작만 담당
+// Preparer: SQL 문 준비만 담당
+// Execer: SQL 실행만 담당
+// Queryer: 데이터 조회 관련 기능 담당
+
+// SOLID 원칙 중 특히 단일 책임 원칙(SRP)과 인터페이스 분리 원칙(ISP)을 잘 준수한 예시입니다.
 type Repository struct {
 	Clocker clock.Clocker
 }
